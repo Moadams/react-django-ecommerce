@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
-// import products from '../products'
-import axios from "axios";
+
 import { listProducts } from "../actions/productActions";
+import Loading from "../components/Loading";
+import Message from "../components/Message";
 
 const Home = () => {
   // const [products, setProducts] = useState([])
@@ -21,9 +22,11 @@ const Home = () => {
         <Container>
           <h1>Latest Products</h1>
           {loading ? (
-            <h2>Loading...</h2>
+            <Loading />
           ) : error ? (
-            <h3>{error}</h3>
+            <Message variant='danger'>
+              {error}
+            </Message>
           ) : (
             <Row>
               {products.map((product) => (
